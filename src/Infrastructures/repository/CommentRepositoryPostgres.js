@@ -24,7 +24,7 @@ class CommentRepositoryPostgres extends ThreadRepository {
 
     const result = await this._pool.query(query);
 
-    return new CreatedComment({ ...result.rows[0] });
+    return new CreatedComment(result.rows[0]);
   }
 
   async verifyCommentExists(id) {

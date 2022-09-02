@@ -11,7 +11,7 @@ class UserRepository {
     throw new Error('USER_REPOSITORY.METHOD_NOT_IMPLEMENTED');
   }
 
-  async getIdByUsername(username) {
+  async getUsernameById(username) {
     throw new Error('USER_REPOSITORY.METHOD_NOT_IMPLEMENTED');
   }
 }

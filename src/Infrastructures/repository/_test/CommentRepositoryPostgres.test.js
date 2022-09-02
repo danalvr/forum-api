@@ -132,6 +132,8 @@ describe('CommentRepositoryPostgres', () => {
       expect(secondComment.id).toEqual(secondCommentId);
       expect(firstComment.thread).toEqual(threadId);
       expect(secondComment.thread).toEqual(threadId);
+      expect(firstComment.owner).toEqual(userId);
+      expect(secondComment.owner).toEqual(userId);
     });
   });
 

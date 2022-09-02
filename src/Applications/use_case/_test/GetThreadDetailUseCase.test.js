@@ -46,26 +46,6 @@ describe('GetThreadDetailUseCase', () => {
       thread: threadId,
     };
 
-    const replyPayload = {
-      id: 'reply-123',
-      content: 'Reply Content',
-      created_at: '2020-01-01',
-      updated_at: '2020-01-01',
-      is_delete: false,
-      owner: 'user-123',
-      comment: commentPayload.id,
-    };
-
-    const replyPayloadDeleted = {
-      id: 'reply-234',
-      content: 'Reply Content',
-      created_at: '2020-01-01',
-      updated_at: '2020-01-01',
-      is_delete: true,
-      owner: 'user-123',
-      comment: commentPayload.id,
-    };
-
     const expectedThread = new Thread({
       id: threadId,
       title: 'Thread Title',
@@ -119,9 +99,61 @@ describe('GetThreadDetailUseCase', () => {
     /** mocking implementation */
     mockUserRepository.getUsernameById = jest.fn(() => Promise.resolve('dicoding'));
     mockThreadRepository.verifyThreadExists = jest.fn(() => Promise.resolve());
-    mockThreadRepository.getThreadById = jest.fn(() => Promise.resolve(threadPayload));
-    mockReplyRepository.getRepliesByCommentId = jest.fn(() => Promise.resolve([replyPayload, replyPayloadDeleted]));
-    mockCommentRepository.getCommentsByThreadId = jest.fn(() => Promise.resolve([commentPayload, commentPayloadDeleted]));
+    mockThreadRepository.getThreadById = jest.fn(() =>
+      Promise.resolve({
+        id: threadId,
+        title: 'Thread Title',
+        body: 'Thread Body',
+        created_at: '2020-01-01',
+        updated_at: '2020-01-01',
+        owner: 'user-123',
+      })
+    );
+    mockReplyRepository.getRepliesByCommentId = jest.fn(() =>
+      Promise.resolve([
+        {
+          id: 'reply-123',
+          content: 'Reply Content',
+          created_at: '2020-01-01',
+          updated_at: '2020-01-01',
+          is_delete: false,
+          owner: 'user-123',
+          comment: commentPayload.id,
+        },
+        {
+          id: 'reply-234',
+          content: 'Reply Content',
+          created_at: '2020-01-01',
+          updated_at: '2020-01-01',
+          is_delete: true,
+          owner: 'user-123',
+          comment: commentPayload.id,
+        },
+      ])
+    );
+    // mockCommentRepository.getCommentsByThreadId = jest.fn(() => Promise.resolve([commentPayload, commentPayloadDeleted]));
+    mockCommentRepository.getCommentsByThreadId = jest.fn(() =>
+      Promise.resolve([
+        {
+          id: 'comment-123',
+          content: 'Comment Content',
+          created_at: '2020-01-01',
+          updated_at: '2020-01-01',
+          is_delete: false,
+          owner: 'user-123',
+          thread: threadId,
+        },
+        {
+          id: 'comment-234',
+          content: 'Comment Content',
+          created_at: '2020-01-01',
+          updated_at: '2020-01-01',
+          is_delete: true,
+          owner: 'user-123',
+          thread: threadId,
+        },
+      ])
+    );
 
     /** create use case implementation */
     const getThreadDetailUseCase = new GetThreadDetailUseCase({

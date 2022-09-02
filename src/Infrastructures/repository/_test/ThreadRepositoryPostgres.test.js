@@ -62,6 +62,8 @@ describe('ThreadRepositoryPostgres', () => {
     it('should return thread payload correctly', async () => {
       // Arrange
       const threadId = 'thread-test';
+      const createdAt = new Date().toISOString();
+      const updatedAt = createdAt;
       await ThreadsTableTestHelper.addThread({ id: threadId, owner: userId });
       const threadRepositoryPostgres = new ThreadRepositoryPostgres(pool);
 
@@ -73,8 +75,11 @@ describe('ThreadRepositoryPostgres', () => {
       expect(thread.id).toEqual(threadId);
       expect(thread.title).toBeDefined();
       expect(thread.body).toBeDefined();
+      expect(thread.body).toEqual('Thread Body');
       expect(thread.created_at).toBeDefined();
+      expect(thread.created_at).toEqual(createdAt);
       expect(thread.updated_at).toBeDefined();
+      expect(thread.updated_at).toEqual(updatedAt);
       expect(thread.owner).toEqual(userId);
     });
   });
