@@ -74,6 +74,7 @@ describe('ThreadRepositoryPostgres', () => {
       expect(thread).toBeDefined();
       expect(thread.id).toEqual(threadId);
       expect(thread.title).toBeDefined();
+      expect(thread.title).toEqual('Thread Title');
       expect(thread.body).toBeDefined();
       expect(thread.body).toEqual('Thread Body');
       expect(thread.created_at).toBeDefined();
