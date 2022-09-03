@@ -45,6 +45,5 @@ describe('A Comment', () => {
     expect(username).toEqual(payload.username);
     expect(date).toEqual(payload.date);
     expect(content).toEqual(payload.content);
-    expect(replies).toEqual(payload.replies);
   });
 });
