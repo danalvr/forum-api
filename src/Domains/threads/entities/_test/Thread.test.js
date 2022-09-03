@@ -41,7 +41,7 @@ describe('A Thread entity', () => {
     };
 
     // Action
-    const { id, title, body, date, username, comments } = new Thread(payload);
+    const { id, title, body, date, username } = new Thread(payload);
 
     // Assert
     expect(id).toEqual(payload.id);
@@ -49,6 +49,5 @@ describe('A Thread entity', () => {
     expect(body).toEqual(payload.body);
     expect(date).toEqual(payload.date);
     expect(username).toEqual(payload.username);
-    expect(comments).toEqual(payload.comments);
   });
 });
