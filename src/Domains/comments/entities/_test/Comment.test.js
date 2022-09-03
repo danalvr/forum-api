@@ -38,7 +38,7 @@ describe('A Comment', () => {
     };
 
     // Action
-    const { id, username, date, content, replies } = new Comment(payload);
+    const { id, username, date, content } = new Comment(payload);
 
     // Assert
     expect(id).toEqual(payload.id);
