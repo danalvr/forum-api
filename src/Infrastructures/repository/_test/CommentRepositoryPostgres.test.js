@@ -113,13 +113,21 @@ describe('CommentRepositoryPostgres', () => {
       const commentRepositoryPostgres = new CommentRepositoryPostgres(pool);
       await CommentsTableTestHelper.addComment({
         id: firstCommentId,
-        thread: threadId,
+        content: 'Comment content',
+        created_at: '2022-09-03T16:25:11.703',
+        updated_at: '2022-09-03T16:25:11.703',
+        is_delete: false,
         owner: userId,
+        thread: threadId,
       });
       await CommentsTableTestHelper.addComment({
         id: secondCommentId,
-        thread: threadId,
+        content: 'Another comment content',
+        created_at: '2022-09-04T16:25:11.704',
+        updated_at: '2022-09-04T16:25:11.704',
+        is_delete: true,
         owner: userId,
+        thread: threadId,
       });
 
       // Action
@@ -134,6 +142,14 @@ describe('CommentRepositoryPostgres', () => {
       expect(secondComment.thread).toEqual(threadId);
       expect(firstComment.owner).toEqual(userId);
       expect(secondComment.owner).toEqual(userId);
+      expect(firstComment.content).toEqual('Comment content');
+      expect(secondComment.content).toEqual('Another comment content');
+      expect(firstComment.is_delete).toEqual(false);
+      expect(secondComment.is_delete).toEqual(true);
+      expect(firstComment.created_at).toEqual('2022-09-03T16:25:11.703');
+      expect(secondComment.created_at).toEqual('2022-09-04T16:25:11.704');
+      expect(firstComment.updated_at).toEqual('2022-09-03T16:25:11.703');
+      expect(secondComment.updated_at).toEqual('2022-09-04T16:25:11.704');
     });
   });
 
