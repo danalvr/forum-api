@@ -8,12 +8,12 @@ class Comment {
     this.content = payload.content;
   }
 
-  _verifyPayload({ id, username, date, content, replies }) {
-    if (!id || !username || !date || !content || !Array.isArray(replies)) {
+  _verifyPayload({ id, username, date, content }) {
+    if (!id || !username || !date || !content) {
       throw new Error('COMMENT.NOT_CONTAIN_NEEDED_PROPERTY');
     }
 
-    if (typeof id !== 'string' || typeof username !== 'string' || typeof date !== 'string' || typeof content !== 'string' || !Array.isArray(replies)) {
+    if (typeof id !== 'string' || typeof username !== 'string' || typeof date !== 'string' || typeof content !== 'string') {
       throw new Error('COMMENT.NOT_MEET_DATA_TYPE_SPECIFICATION');
     }
   }
