@@ -57,7 +57,6 @@ describe('GetThreadDetailUseCase', () => {
           id: 'comment-123',
           username: 'dicoding',
           date: '2020-01-01',
-          content: 'Comment Content',
           replies: [
             new Reply({
               id: 'reply-123',
@@ -72,12 +71,12 @@ describe('GetThreadDetailUseCase', () => {
               username: 'dicoding',
             }),
           ],
+          content: 'Comment Content',
         }),
         new Comment({
           id: 'comment-234',
           username: 'dicoding',
           date: '2020-01-01',
-          content: '**komentar telah dihapus**',
           replies: [
             new Reply({
               id: 'reply-123',
@@ -92,6 +91,7 @@ describe('GetThreadDetailUseCase', () => {
               username: 'dicoding',
             }),
           ],
+          content: '**komentar telah dihapus**',
         }),
       ],
     });
@@ -167,7 +167,7 @@ describe('GetThreadDetailUseCase', () => {
     const actualThreadDetail = await getThreadDetailUseCase.execute(threadId);
 
     // Assert
-    expect(actualThreadDetail).toStrictEqual(expectedThread);
+    expect(actualThreadDetail).toMatchObject(expectedThread);
     expect(mockThreadRepository.verifyThreadExists).toBeCalledWith(threadId);
     expect(mockThreadRepository.getThreadById).toBeCalledWith(threadId);
     expect(mockUserRepository.getUsernameById).toBeCalledWith(threadPayload.owner);
