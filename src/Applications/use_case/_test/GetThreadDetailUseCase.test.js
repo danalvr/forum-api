@@ -36,16 +36,6 @@ describe('GetThreadDetailUseCase', () => {
       thread: threadId,
     };
 
-    const commentPayloadDeleted = {
-      id: 'comment-234',
-      content: 'Comment Content',
-      created_at: '2020-01-01',
-      updated_at: '2020-01-01',
-      is_delete: true,
-      owner: 'user-123',
-      thread: threadId,
-    };
-
     const expectedThread = new Thread({
       id: threadId,
       title: 'Thread Title',
@@ -131,7 +121,6 @@ describe('GetThreadDetailUseCase', () => {
         },
       ])
     );
-    // mockCommentRepository.getCommentsByThreadId = jest.fn(() => Promise.resolve([commentPayload, commentPayloadDeleted]));
     mockCommentRepository.getCommentsByThreadId = jest.fn(() =>
       Promise.resolve([
         {
