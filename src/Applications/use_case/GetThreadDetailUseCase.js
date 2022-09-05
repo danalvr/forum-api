@@ -37,17 +37,21 @@ class GetThreadDetailUseCase {
           })
         );
 
-        return new Comment({
+        const comment = new Comment({
           id: commentPayload.id,
           username: commentOwnerUsername,
           date: commentPayload.created_at,
-          content: commentContent,
           replies,
+          content: commentContent,
         });
+
+        comment.replies = replies;
+
+        return comment;
       })
     );
 
-    return new Thread({
+    const thread = new Thread({
       id: threadPayload.id,
       title: threadPayload.title,
       body: threadPayload.body,
@@ -55,6 +59,10 @@ class GetThreadDetailUseCase {
       username,
       comments,
     });
+
+    thread.comments = comments;
+
+    return thread;
   }
 }
 
