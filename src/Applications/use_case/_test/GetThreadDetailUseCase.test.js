@@ -36,55 +36,51 @@ describe('GetThreadDetailUseCase', () => {
       thread: threadId,
     };
 
+    const expectedReply = [
+      new Reply({
+        id: 'reply-123',
+        content: 'Reply Content',
+        date: '2020-01-01',
+        username: 'dicoding',
+      }),
+      new Reply({
+        id: 'reply-234',
+        content: '**balasan telah dihapus**',
+        date: '2020-01-01',
+        username: 'dicoding',
+      }),
+    ];
+
+    const expectedComment = [
+      new Comment({
+        id: 'comment-123',
+        username: 'dicoding',
+        date: '2020-01-01',
+        // replies: expectedReply,
+        content: 'Comment Content',
+      }),
+      new Comment({
+        id: 'comment-234',
+        username: 'dicoding',
+        date: '2020-01-01',
+        // replies: expectedReply,
+        content: '**komentar telah dihapus**',
+      }),
+    ];
+
+    expectedComment[0].replies = expectedReply;
+    expectedComment[1].replies = expectedReply;
+
     const expectedThread = new Thread({
       id: threadId,
       title: 'Thread Title',
       body: 'Thread Body',
       date: '2020-01-01',
       username: 'dicoding',
-      comments: [
-        new Comment({
-          id: 'comment-123',
-          username: 'dicoding',
-          date: '2020-01-01',
-          replies: [
-            new Reply({
-              id: 'reply-123',
-              content: 'Reply Content',
-              date: '2020-01-01',
-              username: 'dicoding',
-            }),
-            new Reply({
-              id: 'reply-234',
-              content: '**balasan telah dihapus**',
-              date: '2020-01-01',
-              username: 'dicoding',
-            }),
-          ],
-          content: 'Comment Content',
-        }),
-        new Comment({
-          id: 'comment-234',
-          username: 'dicoding',
-          date: '2020-01-01',
-          replies: [
-            new Reply({
-              id: 'reply-123',
-              content: 'Reply Content',
-              date: '2020-01-01',
-              username: 'dicoding',
-            }),
-            new Reply({
-              id: 'reply-234',
-              content: '**balasan telah dihapus**',
-              date: '2020-01-01',
-              username: 'dicoding',
-            }),
-          ],
-          content: '**komentar telah dihapus**',
-        }),
-      ],
+      // comments: expectedComment,
     });
+
+    expectedThread.comments = expectedComment;
 
     /** mocking implementation */
     mockUserRepository.getUsernameById = jest.fn(() => Promise.resolve('dicoding'));
@@ -156,7 +152,7 @@ describe('GetThreadDetailUseCase', () => {
     const actualThreadDetail = await getThreadDetailUseCase.execute(threadId);
 
     // Assert
-    expect(actualThreadDetail).toMatchObject(expectedThread);
+    expect(actualThreadDetail).toStrictEqual(expectedThread);
     expect(mockThreadRepository.verifyThreadExists).toBeCalledWith(threadId);
     expect(mockThreadRepository.getThreadById).toBeCalledWith(threadId);
     expect(mockUserRepository.getUsernameById).toBeCalledWith(threadPayload.owner);
