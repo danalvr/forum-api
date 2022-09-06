@@ -41,7 +41,6 @@ class GetThreadDetailUseCase {
           id: commentPayload.id,
           username: commentOwnerUsername,
           date: commentPayload.created_at,
-          replies,
           content: commentContent,
         });
 
@@ -57,7 +56,6 @@ class GetThreadDetailUseCase {
       body: threadPayload.body,
       date: threadPayload.created_at,
       username,
-      comments,
     });
 
     thread.comments = comments;
