@@ -56,14 +56,12 @@ describe('GetThreadDetailUseCase', () => {
         id: 'comment-123',
         username: 'dicoding',
         date: '2020-01-01',
-        // replies: expectedReply,
         content: 'Comment Content',
       }),
       new Comment({
         id: 'comment-234',
         username: 'dicoding',
         date: '2020-01-01',
-        // replies: expectedReply,
         content: '**komentar telah dihapus**',
       }),
     ];
@@ -77,7 +75,6 @@ describe('GetThreadDetailUseCase', () => {
       body: 'Thread Body',
       date: '2020-01-01',
       username: 'dicoding',
-      // comments: expectedComment,
     });
 
     expectedThread.comments = expectedComment;
