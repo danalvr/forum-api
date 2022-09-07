@@ -7,7 +7,6 @@ describe('A Thread entity', () => {
       id: 'thread-123',
       title: 'Thread title',
       body: 'Thread body',
-      comments: [],
     };
 
     // Action & Assert
@@ -22,7 +21,6 @@ describe('A Thread entity', () => {
       body: 'Thread body',
       date: '2020-01-01',
       username: 'developer',
-      comments: [],
     };
 
     // Action & Assert
@@ -37,7 +35,6 @@ describe('A Thread entity', () => {
       body: 'Thread body',
       date: '2020-01-01',
       username: 'developer',
-      comments: [],
     };
 
     // Action

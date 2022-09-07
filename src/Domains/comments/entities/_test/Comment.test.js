@@ -20,7 +20,6 @@ describe('A Comment', () => {
       username: 'developer',
       date: '2020-01-01',
       content: 'Comment content',
-      replies: [],
     };
 
     // Action & Assert
@@ -34,7 +33,6 @@ describe('A Comment', () => {
       username: 'developer',
       date: '2020-01-01',
       content: 'Comment content',
-      replies: [],
     };
 
     // Action
