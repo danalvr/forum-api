@@ -64,7 +64,7 @@ const createServer = async (container) => {
     method: 'GET',
     path: '/',
     handler: () => ({
-      value: 'continous integration implemented!',
+      value: 'continous integration implemented',
     }),
   });
 
